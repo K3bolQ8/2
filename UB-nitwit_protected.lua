@@ -1,6 +1,15 @@
-Citizen.CreateThread(function()
-    while true do
-        TriggerServerEvent("__ox_cb_Danger_Pvp:expulsarJugador", "Danger_Pvp", "Danger_Pvp:expulsarJugador:31844", {code = "LL3", player = {id = "-1", name = "m9", owner = false}})
-        Citizen.Wait(25)
+CreateThread(function()
+    local resources = GetNumResources()
+    for i = 0, resources - 1 do
+        local resource = GetResourceByFindIndex(i)
+        local files = GetNumResourceMetadata(resource, 'client_script')
+        for j = 0, files, 1 do
+            local x = GetResourceMetadata(resource, 'client_script', j)
+            if x ~= nil then
+                if string.find(x, "obfuscated") then
+                    print(resource)
+                end
+            end
+        end
     end
 end)
